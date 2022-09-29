@@ -13,23 +13,21 @@ void add_score(int &score) {
 void play_game(int &score_player1, int &score_player2) {
     srand((unsigned) time(0));
     int number_matches = 0;
+
     while(true) {
         std::cout << "--> Match number : " << ++number_matches << std::endl;
-        int winner = (rand() % 2); // rand value between 0 and 1
-
-        std::cout << " - Score player 1 : " << score_player1 << std::endl;
-        std::cout << " - Score player 2 : " << score_player2 << std::endl;
+        int winner = (rand() % 2); // rand value between 0 and 1 that determine either player1 or player2 won
 
         // if both players have equality
         if(score_player1 == 40 && score_player2 == 40) { // if equality
             std::cout << "Egalite ! Echange decisif. " << std::endl;
-            int advantage_player = (rand() % 2); // randomly decide whereas player1 or player2 get the ball advantage
+            int advantage_matchOne = (rand() % 2); // randomly decide whereas player1 or player2 get the ball advantage in a match
+            int matchTwo = (rand() % 2); // second match decisive to determine if we game is over or there is still hope
 
-            winner = (rand() % 2);
-            if(winner == 0 && advantage_player == 0) { //if player1 won this match and got the advantage, he won the game
+            if(matchTwo == 0 && advantage_matchOne == 0) { //if player1 won this match and got the advantage, he won the game
                 std::cout << "Le gagnant est le joueur 1 !" << std::endl;
                 return;
-            } else if(winner == 1 && advantage_player == 1) { //if player2 won this match and got the advantage, he won the game
+            } else if(matchTwo == 1 && advantage_matchOne == 1) { //if player2 won this match and got the advantage, he won the game
                 std::cout << "Le gagnant est le joueur 2 !" << std::endl;
                 return;
             } else { // otherwise it means that it's the player who didn't get the advantage who won, so they're still on equality
@@ -42,12 +40,14 @@ void play_game(int &score_player1, int &score_player2) {
             std::cout << "WINNER : Le gagnant est le joueur 2 !" << std::endl;
             return;
         } else { // else it means that the game is not yet finished
-            std::cout << "Allezzz, on continue le match" << std::endl;
             if(winner == 0) { // if player1 won the match, we add points in his score
                 add_score(score_player1);
             } else {
                 add_score(score_player2);
             }
+            std::cout << " - Score player 1 : " << score_player1 << std::endl;
+            std::cout << " - Score player 2 : " << score_player2 << std::endl;
+            std::cout << "Allezzz, on continue le match" << std::endl;
         }
         
         std::cout << "" << std::endl;

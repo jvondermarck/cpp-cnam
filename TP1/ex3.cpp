@@ -1,10 +1,8 @@
 #include <iostream>
 #include <cctype> // to use toUpper()
-#include <algorithm>
+#include <algorithm> // for std::transform()
 #include <cstdlib>
-#include <cmath>
-
-
+#include <cmath> // for floor()
 
 void Ask_Firstname(){
     std::string firstname;

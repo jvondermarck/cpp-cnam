@@ -46,7 +46,7 @@ void Sort_Array(int array[], int size, int isCroissant) {
         for (int j = 0; j < size - i - 1; j++)
             if ((array[j] > array[j + 1] && isCroissant == 1) // if we want to sort croissant and actual value is greater than value+1 -> we swap values
                 || (array[j] < array[j + 1] && isCroissant == 0)) // if we want to sort decroissant and actual value is less than value+1 -> we swap values
-                    Reverse(array[j], array[j+1]);
+                    Reverse(array[j], array[j+1]); // we swap the two values
     }
     
 }
@@ -84,25 +84,34 @@ int main() {
     std::cout << "Enter the size of the array : ";
     std::cin >> size;
 
+     if(std::cin.fail() || size <= 0) { // if not valid value
+        std::cout << "Error. Enter value for the size array (value greater than 0)" << std::endl; 
+        std::cin.clear();
+        std::cin.ignore(); // we clear and ignore the failure to restart the loop
+        return EXIT_FAILURE;
+    }
+
     std::cout << "Sorting croissant (enter : 1) or decroissant (enter : 0) ";
     std::cin >> isCroissant;
 
-    if(isCroissant != 0 && isCroissant != 1) { // if not valid value
+    if(std::cin.fail() || isCroissant != 0 && isCroissant != 1) { // if not valid value
         std::cout << "Error. Enter value between 0 and 1" << std::endl; 
+        std::cin.clear();
+        std::cin.ignore(); // we clear and ignore the failure to restart the loop
         return EXIT_FAILURE;
     } else {
         if(isCroissant == 1) {
-            std::cout << "Croissant sorting :" << std::endl; 
+            std::cout << "You choose a croissant sorting :" << std::endl; 
         } else {
-            std::cout << "Decroissant sorting :" << std::endl;
+            std::cout << "You choose a decroissant sorting :" << std::endl;
         }
     }
 
     int tab [size];
     Random_Array_Value(tab, size);
-    std::cout << "Non sorted array :" << std::endl;
+    std::cout << " -> Non sorted array :" << std::endl;
     Print_Array(tab, size);
-    std::cout << "Sorted array :" << std::endl;
+    std::cout << " -> Sorted array :" << std::endl;
     Sort_Array(tab, size, isCroissant);
     Print_Array(tab, size);
 
