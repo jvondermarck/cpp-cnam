@@ -9,6 +9,17 @@ void Ask_Firstname(){
     std::cout << "What's your firstname ? ";
     std::cin >> firstname;
 
+    if (firstname.length() == 0) {
+        std::cout << "--> Error : enter something !" << std::endl;
+        return; // we start from the beginning of the loop
+    }
+
+    // je dois check si c'est pas un digit mais je ne suis pas arrivé
+    // if(isdigit(firstname)){
+    //     std::cout << "--> Error : please enter a characters !" << std::endl;
+    //     return;
+    // }
+
     std::cout << "Welcome, " << firstname << std::endl;
 }
 
@@ -17,6 +28,17 @@ void Ask_Firstname_V2(){
     std::string lastname;
     std::cout << "What's your full name (name firstname) ? ";
     std::cin >> lastname >> firstname; // ask for firstname and lastname in one single entry 
+
+    if (firstname.length() == 0) {
+        std::cout << "--> Error : enter something !" << std::endl;
+        return; // we start from the beginning of the loop
+    }
+
+    // je dois check si c'est pas un digit mais je ne suis pas arrivé
+    // if(isdigit(firstname)){
+    //     std::cout << "--> Error : please enter a characters !" << std::endl;
+    //     return;
+    // }
 
     if (!lastname.empty()) 
     {
@@ -92,7 +114,7 @@ void Seek_Right_Number_Computer() {
         }
         std::cout << "Number guessed by the computer : " << number_guessed << std::endl;
     } while(number_guessed != number_to_guess);
-    std::cout << "Congrats ! The computer found the right word in " << number_trials << " trials." << std::endl;
+    std::cout << "Congrats ! The computer found the right number in " << number_trials << " trials." << std::endl;
 }
 
 
