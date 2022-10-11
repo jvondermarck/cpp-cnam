@@ -29,7 +29,7 @@ void Ask_Firstname_V2(){
     std::cout << "What's your full name (name firstname) ? ";
     std::cin >> lastname >> firstname; // ask for firstname and lastname in one single entry 
 
-    if (firstname.length() == 0) {
+    if (firstname.length() == 0 || lastname.length() == 0) {
         std::cout << "--> Error : enter something !" << std::endl;
         return; // we start from the beginning of the loop
     }
