@@ -2,9 +2,10 @@
 #define TRIANGLE_HPP
 
 #include <iostream>
+#include<cmath>
 #include "point.hpp"
 
-class Cercle {
+class Triangle {
     public:
         /**
          * @brief Construct a new Cercle object
@@ -13,12 +14,14 @@ class Cercle {
          * @param b : Point coordinate
          * @param c : Point coordinate
          */
-        Cercle(Point a, Point b, Point c)
+        Triangle(Point a, Point b, Point c)
         {
             A = a;
             B = b;
             C = c;
         }
+
+        float distance_deux_points(const Point &pointA, const Point &pointB);
 
         /**
          * @brief La base du triangle, la plus grande valeur
@@ -26,15 +29,20 @@ class Cercle {
          * @return float
          */
         float base();
-
-
+        
+        float hauteur();
+        float surface();
+        float longueur();
+        bool estIsocele();
+        bool estRectangle();
+        bool estEquilateral();
 
         /**
          * @brief Set the Point A object
          * 
          * @param a 
          */
-        inline void setPointA(Point a) { this->A = a; }
+        inline void setPointA(Point &a) { this->A = a; }
 
         /**
          * @brief Get the Point A object
@@ -48,7 +56,7 @@ class Cercle {
          * 
          * @param b 
          */
-        inline void setPointB(Point b) { this->B = b; }
+        inline void setPointB(Point &b) { this->B = b; }
 
         /**
          * @brief Get the Point B object
@@ -62,7 +70,7 @@ class Cercle {
          * 
          * @param c 
          */
-        inline void setPointC(Point c) { this->C = c; }
+        inline void setPointC(Point &c) { this->C = c; }
 
         /**
          * @brief Get the Point C object
@@ -71,7 +79,9 @@ class Cercle {
          */
         inline Point getPointC() const { return this->C; }
     private:
-        Point A, B, C;
+        Point A;
+        Point B;
+        Point C;
 };
 
 #endif 
