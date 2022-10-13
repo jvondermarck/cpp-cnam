@@ -1,26 +1,26 @@
 #include "cercle.hpp"
 
-float Cercle::distance_deux_points(Point point)
+float Cercle::distance_deux_points(const Point &point)
 {
-    return std::sqrt(std::pow(point.x - this->point_centre.x, 2) - std::pow(point.y - this->point_centre.y, 2));
+    return std::sqrt((std::pow(point.x - this->point_centre.x, 2)) + (std::pow(point.y - this->point_centre.y, 2)));
 }
 
-bool Cercle::isOnCercle(Point point) 
+bool Cercle::isOnCercle(const Point &point) 
 {
     return distance_deux_points(point) == this->diametre;
 }
 
-bool Cercle::isInsideCercle(Point point) 
+bool Cercle::isInsideCercle(const Point &point) 
 {
     return distance_deux_points(point) < this->diametre;
 }
 
-inline float Cercle::getPerimetre()
+inline float Cercle::getPerimetre() const
 {
     return M_PI*this->diametre;
 }
 
-inline float Cercle::getSurface()
+inline float Cercle::getSurface() const
 {
     return M_PI*std::pow(this->diametre/2, 2);
 }

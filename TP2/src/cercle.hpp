@@ -28,7 +28,7 @@ class Cercle {
          * @param point : le Point en référence à prendre pour évaluer la distance
          * @return float 
          */
-        float distance_deux_points(Point point);
+        float distance_deux_points(const Point &point);
 
         /**
          * @brief Savoir si un point est sur le cercle
@@ -37,7 +37,7 @@ class Cercle {
          * @return true : si c'est sur le cercle
          * @return false : si cést pas sur le cercle
          */
-        bool isOnCercle(Point point);
+        bool isOnCercle(const Point &point);
 
         /**
          * @brief Savoir si un point est à l'intérieur du cercle
@@ -46,28 +46,28 @@ class Cercle {
          * @return true : si c'est à l'intérieur le cercle
          * @return false : si c'est pas à l'intérieur le cercle
          */
-        bool isInsideCercle(Point point);
+        bool isInsideCercle(const Point &point);
 
         /**
          * @brief Get the Perimetre of the Cercle
          * 
          * @return float 
          */
-        float getPerimetre();
+        float getPerimetre() const;
 
         /**
          * @brief Get the Surface of the Cercle
          * 
          * @return float 
          */
-        float getSurface();
+        float getSurface() const;
 
         /**
          * @brief Set the Centre object
          * 
          * @param point 
          */
-        inline void setCentre(Point point) { this->point_centre = point; }
+        inline void setCentre(const Point &point) { this->point_centre = point; }
 
         /**
          * @brief Get the Centre object
