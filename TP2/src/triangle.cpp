@@ -7,12 +7,12 @@ float Triangle::distance_deux_points(const Point &pointA, const Point &pointB)
 
 float Triangle::base() 
 {
-    float AB = distance_deux_points(this->A, this->B);
-    float AC = distance_deux_points(this->A, this->C);
-    float BC = distance_deux_points(this->B, this->C);
+    float AB = distance_deux_points(this->point_A, this->point_B);
+    float AC = distance_deux_points(this->point_A, this->point_C);
+    float BC = distance_deux_points(this->point_B, this->point_C);
     float plusGrandValeur = AB;
 
-    if(plusGrandValeur < AC) plusGrandValeur = AC;
+    if(plusGrandValeur < AC && AC > BC) plusGrandValeur = AC;
     if(plusGrandValeur < BC) plusGrandValeur = BC;
     return plusGrandValeur;
 }
@@ -24,25 +24,43 @@ float Triangle::hauteur()
 
 float Triangle::surface()
 {
-    float s = (distance_deux_points(this->A, this->B) + distance_deux_points(this->A, this->C) + distance_deux_points(this->B, this->C))/2;
-    return std::sqrt(s * (s-distance_deux_points(this->A, this->B))*(s-distance_deux_points(this->A, this->C))*(s-distance_deux_points(this->B, this->C)));
+    float semi_perimetre = this->longueur()/2;
+    return std::sqrt(semi_perimetre * (semi_perimetre-distance_deux_points(this->point_A, this->point_B))*(semi_perimetre-distance_deux_points(this->point_A, this->point_C))*(semi_perimetre-distance_deux_points(this->point_B, this->point_C)));
 }
 
 float Triangle::longueur()
 {
-    return 0;
+    return distance_deux_points(this->point_A, this->point_B) + distance_deux_points(this->point_A, this->point_C) + distance_deux_points(this->point_B, this->point_C);
 }
 
 bool Triangle::estIsocele()
 {
-    return 0;
+    return (distance_deux_points(this->point_A, this->point_B) == distance_deux_points(this->point_A, this->point_C)) || 
+        (distance_deux_points(this->point_A, this->point_B) == distance_deux_points(this->point_B, this->point_C)) ||
+        (distance_deux_points(this->point_A, this->point_C) == distance_deux_points(this->point_B, this->point_C));
 }
+
 bool Triangle::estRectangle()
 {
-    return 0;
+    float AB = distance_deux_points(this->point_A, this->point_B);
+    float AC = distance_deux_points(this->point_A, this->point_C);
+    float BC = distance_deux_points(this->point_B, this->point_C);
+    float plusGrandValeur = AB;
+    
+    float addition = addition = std::pow(AC, 2) + std::pow(BC, 2);;
+    if(plusGrandValeur < AC && AC > BC){
+        addition = std::pow(AB, 2) + std::pow(BC, 2);
+        plusGrandValeur = AC;
+    } else if(plusGrandValeur < BC) {
+        addition = std::pow(AB, 2) + std::pow(AC, 2);
+        plusGrandValeur = BC;
+    }
+
+    return std::pow(plusGrandValeur, 2) == addition;
 }
 
 bool Triangle::estEquilateral()
 {
-    return 0;
+    return (distance_deux_points(this->point_A, this->point_B) == distance_deux_points(this->point_A, this->point_C)) && 
+        (distance_deux_points(this->point_A, this->point_C) == distance_deux_points(this->point_B, this->point_C));
 }

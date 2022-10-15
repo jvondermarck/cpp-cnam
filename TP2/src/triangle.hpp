@@ -8,17 +8,17 @@
 class Triangle {
     public:
         /**
-         * @brief Construct a new Cercle object
+         * @brief Construire un triangle avec 3 points différents
          * 
-         * @param a : Point coordinate
-         * @param b : Point coordinate
-         * @param c : Point coordinate
+         * @param point_a : Point coordinate
+         * @param point_b : Point coordinate
+         * @param point_c : Point coordinate
          */
-        Triangle(Point a, Point b, Point c)
+        Triangle(Point point_a, Point point_b, Point point_c)
         {
-            A = a;
-            B = b;
-            C = c;
+            this->point_A = point_a;
+            this->point_B = point_b;
+            this->point_C = point_c;
         }
 
         float distance_deux_points(const Point &pointA, const Point &pointB);
@@ -30,11 +30,49 @@ class Triangle {
          */
         float base();
         
+        /**
+         * @brief La hauteur du triangle
+         * 
+         * @return float 
+         */
         float hauteur();
+
+        /**
+         * @brief La surface du triangle
+         * 
+         * @return float 
+         */
         float surface();
+
+        /**
+         * @brief La longueur du triangle
+         * 
+         * @return float 
+         */
         float longueur();
+
+        /**
+         * @brief Si le triangle est isocele ou non
+         * 
+         * @return true 
+         * @return false 
+         */
         bool estIsocele();
+
+        /**
+         * @brief Si le triangle est rectangle ou non
+         * 
+         * @return true 
+         * @return false 
+         */
         bool estRectangle();
+
+        /**
+         * @brief Si le triangle est equilatéral ou non
+         * 
+         * @return true 
+         * @return false 
+         */
         bool estEquilateral();
 
         /**
@@ -42,46 +80,46 @@ class Triangle {
          * 
          * @param a 
          */
-        inline void setPointA(Point &a) { this->A = a; }
+        inline void setPointA(Point &point_a) { this->point_A = point_a; }
 
         /**
          * @brief Get the Point A object
          * 
          * @return Point 
          */
-        inline Point getPointA() const { return this->A; }
+        inline Point getPointA() const { return this->point_A; }
 
         /**
          * @brief Set the Point B object
          * 
          * @param b 
          */
-        inline void setPointB(Point &b) { this->B = b; }
+        inline void setPointB(Point &point_B) { this->point_B = point_B; }
 
         /**
          * @brief Get the Point B object
          * 
          * @return Point 
          */
-        inline Point getPointB() const { return this->B; }
+        inline Point getPointB() const { return this->point_B; }
         
         /**
          * @brief Set the Point C object
          * 
          * @param c 
          */
-        inline void setPointC(Point &c) { this->C = c; }
+        inline void setPointC(Point &point_C) { this->point_C = point_C; }
 
         /**
          * @brief Get the Point C object
          * 
          * @return Point 
          */
-        inline Point getPointC() const { return this->C; }
+        inline Point getPointC() const { return this->point_C; }
     private:
-        Point A;
-        Point B;
-        Point C;
+        Point point_A;
+        Point point_B;
+        Point point_C;
 };
 
 #endif 
