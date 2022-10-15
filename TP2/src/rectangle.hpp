@@ -24,7 +24,7 @@ class Rectangle{
          * @return true : périmètre objet > périmètre du rectangle en paramètre
          * @return false : périmètre objet < périmètre du rectangle en paramètre
          */
-        bool estPlusGrandPerimetre(const Rectangle &rectangle);
+        inline bool estPlusGrandPerimetre(const Rectangle &rectangle) const;
 
         /**
          * @brief renvoie true si l’objet possède une plus grande surface que le rectangle passé en paramètre
@@ -33,7 +33,7 @@ class Rectangle{
          * @return true : surface objet > surface du rectangle en paramètre
          * @return false : surface objet < surface du rectangle en paramètre
          */
-        bool estPlusPetitSurface(const Rectangle &rectangle);
+        inline bool estPlusPetitSurface(const Rectangle &rectangle) const;
 
         /**
          * @brief Obtenir le périmètre du Rectangle
@@ -87,7 +87,7 @@ class Rectangle{
         /**
          * @brief Obtenir le Point du rectangle
          * 
-         * @return Point l'objet Point
+         * @return Point l'objet reference
          */
         inline Point getPoint() const { return this->point;}
 
