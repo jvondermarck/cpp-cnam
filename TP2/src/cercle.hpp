@@ -15,11 +15,12 @@ class Cercle {
          * @param point : le point
          * @param diametre : le diamètre du cercle
          */
-        Cercle(Point point, int diametre)
-        {
-            this->point_centre = point;
-            this->diametre = diametre;
-        }
+        Cercle(Point _point, int _diametre);
+
+        /**
+         * @brief Détruire l'objet Cercle
+         */
+        // ~Cercle();
 
         /**
          * @brief Retourne la distance entre deux points
@@ -27,7 +28,7 @@ class Cercle {
          * @param point : le Point en référence à prendre pour évaluer la distance
          * @return float 
          */
-        float distance_deux_points(const Point &point);
+        float distanceDeuxPoints(const Point &point);
 
         /**
          * @brief Savoir si un point est sur le cercle

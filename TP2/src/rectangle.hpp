@@ -10,12 +10,14 @@ class Rectangle{
          * 
          * @param longueur longueur d'un rectangle
          * @param largueur largueur d'un rectangle
+         * @param point point supérieur gauche
          */
-        Rectangle (const int longueur, const int largueur)
-        {
-            this->longueur = longueur;
-            this->largueur = largueur;
-        }
+        Rectangle (const int _longueur, const int _largueur);
+
+        /**
+         * @brief Détruire l'objet rectangle
+         */
+        // ~Rectangle();
 
         /**
          * @brief renvoie true si l’objet possède un plus grand périmètre  que  le  rectangle passé en paramètre
@@ -33,21 +35,21 @@ class Rectangle{
          * @return true : surface objet > surface du rectangle en paramètre
          * @return false : surface objet < surface du rectangle en paramètre
          */
-        inline bool estPlusPetitSurface(const Rectangle &rectangle) const;
+        inline bool estPlusGrandSurface(const Rectangle &rectangle) const;
 
         /**
          * @brief Obtenir le périmètre du Rectangle
          * 
          * @return int le périmetre
          */
-        inline float getPerimetre() const;
+        inline int getPerimetre() const;
 
         /**
          * @brief Obtenir la surface du Rectangle
          * 
          * @return int la surface
          */
-        inline float getSurface() const;
+        inline int getSurface() const;
 
         /**
          * @brief Mettre la longueur du rectangle

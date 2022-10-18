@@ -1,15 +1,17 @@
 #include "triangle.hpp"
 
-float Triangle::distance_deux_points(const Point &pointA, const Point &pointB)
+Triangle::Triangle(Point _point_A, Point _point_B, Point _point_C): point_A(_point_A), point_B(_point_B), point_C(_point_C) {}
+
+float Triangle::distanceDeuxPoints(const Point &point_A, const Point &point_B) const
 {
-    return std::sqrt((std::pow(pointB.x - pointA.x, 2)) + (std::pow(pointB.y - pointA.y, 2)));
+    return std::sqrt((std::pow(point_B.x - point_A.x, 2)) + (std::pow(point_B.y - point_A.y, 2)));
 }
 
 float Triangle::base() 
 {
-    float AB = distance_deux_points(this->point_A, this->point_B);
-    float AC = distance_deux_points(this->point_A, this->point_C);
-    float BC = distance_deux_points(this->point_B, this->point_C);
+    float AB = distanceDeuxPoints(this->point_A, this->point_B);
+    float AC = distanceDeuxPoints(this->point_A, this->point_C);
+    float BC = distanceDeuxPoints(this->point_B, this->point_C);
     float plusGrandValeur = AB;
 
     if(plusGrandValeur < AC && AC > BC) plusGrandValeur = AC;
@@ -25,26 +27,26 @@ float Triangle::hauteur()
 float Triangle::surface()
 {
     float semi_perimetre = this->longueur()/2;
-    return std::sqrt(semi_perimetre * (semi_perimetre-distance_deux_points(this->point_A, this->point_B))*(semi_perimetre-distance_deux_points(this->point_A, this->point_C))*(semi_perimetre-distance_deux_points(this->point_B, this->point_C)));
+    return std::sqrt(semi_perimetre * (semi_perimetre-distanceDeuxPoints(this->point_A, this->point_B))*(semi_perimetre-distanceDeuxPoints(this->point_A, this->point_C))*(semi_perimetre-distanceDeuxPoints(this->point_B, this->point_C)));
 }
 
 float Triangle::longueur()
 {
-    return distance_deux_points(this->point_A, this->point_B) + distance_deux_points(this->point_A, this->point_C) + distance_deux_points(this->point_B, this->point_C);
+    return distanceDeuxPoints(this->point_A, this->point_B) + distanceDeuxPoints(this->point_A, this->point_C) + distanceDeuxPoints(this->point_B, this->point_C);
 }
 
 bool Triangle::estIsocele()
 {
-    return (distance_deux_points(this->point_A, this->point_B) == distance_deux_points(this->point_A, this->point_C)) || 
-        (distance_deux_points(this->point_A, this->point_B) == distance_deux_points(this->point_B, this->point_C)) ||
-        (distance_deux_points(this->point_A, this->point_C) == distance_deux_points(this->point_B, this->point_C));
+    return (distanceDeuxPoints(this->point_A, this->point_B) == distanceDeuxPoints(this->point_A, this->point_C)) || 
+        (distanceDeuxPoints(this->point_A, this->point_B) == distanceDeuxPoints(this->point_B, this->point_C)) ||
+        (distanceDeuxPoints(this->point_A, this->point_C) == distanceDeuxPoints(this->point_B, this->point_C));
 }
 
 bool Triangle::estRectangle()
 {
-    float AB = distance_deux_points(this->point_A, this->point_B);
-    float AC = distance_deux_points(this->point_A, this->point_C);
-    float BC = distance_deux_points(this->point_B, this->point_C);
+    float AB = distanceDeuxPoints(this->point_A, this->point_B);
+    float AC = distanceDeuxPoints(this->point_A, this->point_C);
+    float BC = distanceDeuxPoints(this->point_B, this->point_C);
     float plusGrandValeur = AB;
     
     float addition = addition = std::pow(AC, 2) + std::pow(BC, 2);;
@@ -61,6 +63,6 @@ bool Triangle::estRectangle()
 
 bool Triangle::estEquilateral()
 {
-    return (distance_deux_points(this->point_A, this->point_B) == distance_deux_points(this->point_A, this->point_C)) && 
-        (distance_deux_points(this->point_A, this->point_C) == distance_deux_points(this->point_B, this->point_C));
+    return (distanceDeuxPoints(this->point_A, this->point_B) == distanceDeuxPoints(this->point_A, this->point_C)) && 
+        (distanceDeuxPoints(this->point_A, this->point_C) == distanceDeuxPoints(this->point_B, this->point_C));
 }

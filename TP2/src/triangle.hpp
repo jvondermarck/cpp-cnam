@@ -14,14 +14,14 @@ class Triangle {
          * @param point_b : Point coordinate
          * @param point_c : Point coordinate
          */
-        Triangle(Point point_a, Point point_b, Point point_c)
-        {
-            this->point_A = point_a;
-            this->point_B = point_b;
-            this->point_C = point_c;
-        }
+        Triangle(Point _point_A, Point _point_B, Point _point_C);
 
-        float distance_deux_points(const Point &pointA, const Point &pointB);
+        /**
+         * @brief Détruire l'objet Triangle
+         */
+        // ~Triangle();
+
+        float distanceDeuxPoints(const Point &point_A, const Point &point_B) const;
 
         /**
          * @brief La base du triangle, la plus grande valeur
