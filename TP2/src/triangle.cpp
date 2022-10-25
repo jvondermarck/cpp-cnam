@@ -37,9 +37,11 @@ float Triangle::longueur()
 
 bool Triangle::estIsocele()
 {
-    return (distanceDeuxPoints(this->point_A, this->point_B) == distanceDeuxPoints(this->point_A, this->point_C)) || 
-        (distanceDeuxPoints(this->point_A, this->point_B) == distanceDeuxPoints(this->point_B, this->point_C)) ||
-        (distanceDeuxPoints(this->point_A, this->point_C) == distanceDeuxPoints(this->point_B, this->point_C));
+    float AB = distanceDeuxPoints(this->point_A, this->point_B);
+    float AC = distanceDeuxPoints(this->point_A, this->point_C);
+    float BC = distanceDeuxPoints(this->point_B, this->point_C);
+
+    return ((AB == BC) || (AB == AC) || (BC == BC));
 }
 
 bool Triangle::estRectangle()
@@ -63,6 +65,13 @@ bool Triangle::estRectangle()
 
 bool Triangle::estEquilateral()
 {
-    return (distanceDeuxPoints(this->point_A, this->point_B) == distanceDeuxPoints(this->point_A, this->point_C)) && 
-        (distanceDeuxPoints(this->point_A, this->point_C) == distanceDeuxPoints(this->point_B, this->point_C));
+    float AB = distanceDeuxPoints(this->point_A, this->point_B);
+    float AC = distanceDeuxPoints(this->point_A, this->point_C);
+    float BC = distanceDeuxPoints(this->point_B, this->point_C);
+
+    return (AB == BC) && (AB == AC) && (BC == AC);
 }
+
+// std::cout << " - AB : " << std::__cxx11::to_string(AB) << std::endl;
+// std::cout << " - AC : " << std::__cxx11::to_string(AC) << std::endl;
+// std::cout << " - BC : " << std::__cxx11::to_string(BC) << std::endl;

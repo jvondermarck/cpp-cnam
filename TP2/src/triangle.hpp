@@ -19,7 +19,7 @@ class Triangle {
         /**
          * @brief Détruire l'objet Triangle
          */
-        // ~Triangle();
+        ~Triangle() = default;
 
         float distanceDeuxPoints(const Point &point_A, const Point &point_B) const;
 
