@@ -20,7 +20,7 @@ class Cercle {
         /**
          * @brief Détruire l'objet Cercle
          */
-        // ~Cercle();
+         ~Cercle() = default;
 
         /**
          * @brief Retourne la distance entre deux points

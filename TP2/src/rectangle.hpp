@@ -17,7 +17,7 @@ class Rectangle{
         /**
          * @brief Détruire l'objet rectangle
          */
-        // ~Rectangle();
+        ~Rectangle() = default;
 
         /**
          * @brief renvoie true si l’objet possède un plus grand périmètre  que  le  rectangle passé en paramètre
