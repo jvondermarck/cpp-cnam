@@ -32,6 +32,7 @@ void Cercle::afficher(Point &dansCercle, Point &surCercle) const
     std::cout << "Cercle : " << std::endl;
     std::cout << " - Périmètre : " << this->getPerimetre() << std::endl;
     std::cout << " - Surface : " << this->getSurface() << std::endl;
+    std::cout << " - Diametre : " << this->getDiametre() << std::endl;
     std::cout << " - Point xCentre : " << this->getCentre().x << " - yCentre : " << this->getCentre().y << std::endl;
     std::cout << " - Est dans cercle ? : " << this->estDansLeCercle(dansCercle) << std::endl;
     std::cout << " - Est sur le cercle ? : " << this->estSurLeCercle(surCercle) << std::endl;
