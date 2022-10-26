@@ -28,28 +28,28 @@ class Triangle {
          * 
          * @return float
          */
-        float base();
+        float base() const;
         
         /**
          * @brief La hauteur du triangle
          * 
          * @return float 
          */
-        float hauteur();
+        float hauteur() const;
 
         /**
          * @brief La surface du triangle
          * 
          * @return float 
          */
-        float surface();
+        float surface() const;
 
         /**
          * @brief La longueur du triangle
          * 
          * @return float 
          */
-        float longueur();
+        float longueur() const;
 
         /**
          * @brief Si le triangle est isocele ou non
@@ -57,7 +57,7 @@ class Triangle {
          * @return true 
          * @return false 
          */
-        bool estIsocele();
+        bool estIsocele() const;
 
         /**
          * @brief Si le triangle est rectangle ou non
@@ -65,7 +65,7 @@ class Triangle {
          * @return true 
          * @return false 
          */
-        bool estRectangle();
+        bool estRectangle() const;
 
         /**
          * @brief Si le triangle est equilatéral ou non
@@ -73,7 +73,7 @@ class Triangle {
          * @return true 
          * @return false 
          */
-        bool estEquilateral();
+        bool estEquilateral() const;
 
         /**
          * @brief Set the Point A object
@@ -116,6 +116,11 @@ class Triangle {
          * @return Point 
          */
         inline Point getPointC() const { return this->point_C; }
+
+        /**
+         * @brief Affiche toutes les informations du triangle
+         */
+        void afficher() const;
     private:
         Point point_A;
         Point point_B;

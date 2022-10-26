@@ -2,6 +2,7 @@
 #define RECTANGLE_HPP
 
 #include "point.hpp"
+#include <iostream>
 
 class Rectangle{
     public:
@@ -92,6 +93,14 @@ class Rectangle{
          * @return Point l'objet reference
          */
         inline Point getPoint() const { return this->point;}
+
+        /**
+         * @brief Affiche toutes les informations du rectangle
+         * 
+         * @param grandPerimetre : va vérfier que l’objet actuel possède un plus grand perimetre que le rectangle passé en paramètre (grandPerimetre)
+         * @param grandSurface : va vérfier que l’objet actuel possède une plus grande surface que le rectangle passé en paramètre (grandSurface)
+         */
+        void afficher(Rectangle &grandPerimetre, Rectangle &grandSurface) const;
 
     private:
         /**

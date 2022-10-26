@@ -35,3 +35,14 @@ int Rectangle::getSurface() const
 { 
     return longueur*largueur; 
 }
+
+void Rectangle::afficher(Rectangle &grandPerimetre, Rectangle &grandSurface) const
+{
+    std::cout << "Rectangle : " << std::endl;
+    std::cout << " - Périmètre : " << this->getPerimetre() << std::endl;
+    std::cout << " - Longueur : " << this->getLongueur() << std::endl;
+    std::cout << " - Largueur : " << this->getLargueur() << std::endl;
+    std::cout << " - Surface : " << this->getSurface() << std::endl;
+    std::cout << " - Est plus grand périmetre ? : " << this->estPlusGrandPerimetre(grandPerimetre) << std::endl;
+    std::cout << " - Est plus grande surface ? : " << this->estPlusGrandSurface(grandSurface) << std::endl;
+}

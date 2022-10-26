@@ -7,7 +7,7 @@ float Triangle::distanceDeuxPoints(const Point &point_A, const Point &point_B) c
     return std::sqrt((std::pow(point_B.x - point_A.x, 2)) + (std::pow(point_B.y - point_A.y, 2)));
 }
 
-float Triangle::base() 
+float Triangle::base() const
 {
     float AB = distanceDeuxPoints(this->point_A, this->point_B);
     float AC = distanceDeuxPoints(this->point_A, this->point_C);
@@ -19,23 +19,23 @@ float Triangle::base()
     return plusGrandValeur;
 }
 
-float Triangle::hauteur()
+float Triangle::hauteur() const
 {
     return 2*(this->surface() / this->base());
 }
 
-float Triangle::surface()
+float Triangle::surface() const
 {
     float semi_perimetre = this->longueur()/2;
     return std::sqrt(semi_perimetre * (semi_perimetre-distanceDeuxPoints(this->point_A, this->point_B))*(semi_perimetre-distanceDeuxPoints(this->point_A, this->point_C))*(semi_perimetre-distanceDeuxPoints(this->point_B, this->point_C)));
 }
 
-float Triangle::longueur()
+float Triangle::longueur() const
 {
     return distanceDeuxPoints(this->point_A, this->point_B) + distanceDeuxPoints(this->point_A, this->point_C) + distanceDeuxPoints(this->point_B, this->point_C);
 }
 
-bool Triangle::estIsocele()
+bool Triangle::estIsocele() const
 {
     float AB = distanceDeuxPoints(this->point_A, this->point_B);
     float AC = distanceDeuxPoints(this->point_A, this->point_C);
@@ -44,7 +44,7 @@ bool Triangle::estIsocele()
     return ((AB == BC) || (AB == AC) || (BC == BC));
 }
 
-bool Triangle::estRectangle()
+bool Triangle::estRectangle() const
 {
     float AB = distanceDeuxPoints(this->point_A, this->point_B);
     float AC = distanceDeuxPoints(this->point_A, this->point_C);
@@ -63,13 +63,28 @@ bool Triangle::estRectangle()
     return std::pow(plusGrandValeur, 2) == addition;
 }
 
-bool Triangle::estEquilateral()
+bool Triangle::estEquilateral() const
 {
     float AB = distanceDeuxPoints(this->point_A, this->point_B);
     float AC = distanceDeuxPoints(this->point_A, this->point_C);
     float BC = distanceDeuxPoints(this->point_B, this->point_C);
 
     return (AB == BC) && (AB == AC) && (BC == AC);
+}
+
+void Triangle::afficher() const
+{
+    std::cout << "Triangle : " << std::endl;
+    std::cout << " - Base : " << this->base() << std::endl;
+    std::cout << " - Hauteur : " << this->hauteur() << std::endl;
+    std::cout << " - Surface : " << this->surface() << std::endl;
+    std::cout << " - Longueur : " << this->longueur() << std::endl;
+    std::cout << " - Point Ax : " << this->getPointA().x << " - Ay : " << this->getPointA().y << std::endl;
+    std::cout << " - Point Bx : " << this->getPointB().x << " - By : " << this->getPointB().y << std::endl;
+    std::cout << " - Point Cy : " << this->getPointC().x << " - Cy : " << this->getPointC().y << std::endl;
+    std::cout << " - Est rectangle ? : " << this->estRectangle() << std::endl;
+    std::cout << " - Est isocèle ? : " << this->estIsocele() << std::endl;
+    std::cout << " - Est équilérateral ? : " << this->estEquilateral() << std::endl;
 }
 
 // std::cout << " - AB : " << std::__cxx11::to_string(AB) << std::endl;
