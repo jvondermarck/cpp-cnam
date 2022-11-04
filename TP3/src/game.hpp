@@ -2,6 +2,7 @@
 #define GAME_HPP
 
 #include <iostream>
+#include <vector>
 #include "token.hpp"
 #include "player.hpp"
 #include "square.hpp"
@@ -11,18 +12,23 @@
  */
 class Game {
     public:
-        Game();
+        Game(const Player& player1, const Player& player2, int line, int column);
         virtual ~Game();
-        virtual void initGame() = 0;
-        virtual void initBoard() = 0;
-        virtual void displayBoard() = 0;
-        virtual Token askDropToken(const Player& player) = 0;
-        virtual void dropOffToken(const Token& token) = 0;
-        virtual void playRound(const Player& player) = 0;
+        void initGame();
+        void initBoard();
+        virtual void displayBoard();
+        Token askDropToken(const Player& player);
+        void dropOffToken(const Token& token);
+        void playRound(const Player& player);
         virtual bool isPlayerWon(const Player& player) = 0;
-        virtual bool isDraw() = 0;
+        bool isDraw();
         virtual bool isGameOver(const Player& player) = 0;
-    private:
+    protected:
+        std::vector<std::vector<Square>> square_grid; // 2D vector array that don't need a specific size array at instiantiation
+        const Player player_one;
+        const Player player_two;
+        int x_total_square;
+        int y_total_square;
 };
 
 #endif
