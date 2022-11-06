@@ -39,7 +39,7 @@ public:
      * 
      * @param line 
      */
-    inline void setLine(int line) { this->coord_x= line;}
+    inline void setLine(int line) { this->coord_x = line;}
 
     /**
      * @brief Get the column coordinate of the position of a token on the game

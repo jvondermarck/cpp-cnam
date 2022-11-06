@@ -1,9 +1,9 @@
 #include "game.hpp"
 
-Game::Game(const Player& player1, const Player& player2, int line, int column): player_one(player1), player_two(player2)
+Game::Game(const Player& player1, const Player& player2, int line, int column): 
+    player_one(player1), player_two(player2),
+    x_total_square(line), y_total_square(column)
 {
-    this->x_total_square = line;
-    this->y_total_square = column;
     this->square_grid.resize(this->x_total_square, std::vector<Square>(this->y_total_square));
     
     this->initGame();
@@ -66,46 +66,9 @@ void Game::displayBoard()
 
 void Game::playRound(const Player& player)
 {
-    Token token = this->askDropToken(player);
+    Token token = this->getTokenLocation(player);
     this->dropOffToken(token);
 }
-
-Token Game::askDropToken(const Player& player)
-{
-    int line = -1;
-    int column = -1;
-    std::cout << "\n- Player with " << player.colorToString() << " tokens, place your token" << std::endl;
-
-    while (true)
-    {
-        while (line > this->x_total_square || line < 1)
-        {
-            std::cout << "Enter the x coordinate : ";
-            std::cin >> line;
-        }
-
-        line--; // bc we start at index 0
-
-        while (column > this->y_total_square || column < 1)
-        {
-            std::cout << "Enter the y coordinate : ";
-            std::cin >> column;
-        }
-
-        column--;
-
-        if (this->square_grid[line][column].isEmpty())
-        {
-            Token token = Token(player.getColorToken(), line, column);
-            return token;
-        } else
-        {
-            std::cout << "The case is occupied. Try again." << std::endl;
-            line = 0;
-            column = 0;
-        }
-    }
-} 
 
 void Game::dropOffToken(const Token& token)
 {
@@ -127,4 +90,45 @@ bool Game::isDraw()
         }
     }
     return true;
+}
+
+
+bool operator==(const Player& player, const Player& playerCompare)
+{
+   return player.getColorToken() == playerCompare.getColorToken();
+}
+
+void Game::playGame()
+{
+    Player actualPlayer = this->player_one;
+    while(true)
+    {
+        this->playRound(actualPlayer);
+        if(this->isGameOver(actualPlayer)){
+            std::cout << "GAME OVER\n" << std::endl;
+            if(this->isDraw()){
+                char playAgain;
+                std::cout << "DRAW MATCH" << std::endl;
+                
+                while((playAgain != 'y') && (playAgain != 'n')){
+                    std::cout << "Do you wanna play again ? y/n ";
+                    std::cin >> playAgain;
+                }
+
+                if(playAgain == 'y'){
+                    std::cout << "We restart the game !";
+                    this->initBoard();
+                    this->playGame();
+                } else {
+                    std::cout << "Good bye!";
+                    exit(0);
+                }
+            } else {
+                break;
+            }
+        }
+
+        // we change the actual player
+        actualPlayer = (actualPlayer == this->player_one) ? this->player_two : this->player_one;
+    }
 }

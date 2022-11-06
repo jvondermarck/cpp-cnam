@@ -8,6 +8,8 @@ add_executable(tp3
     src/main.cpp
     src/morpion.cpp
     src/morpion.hpp
+    src/puissance4.hpp
+    src/puissance4.cpp
     src/player.cpp
     src/player.hpp
     src/square.hpp

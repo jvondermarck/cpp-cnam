@@ -2,6 +2,7 @@
 #define PUISSANCE_4_HPP
 
 #include <iostream>
+#include "game.hpp"
 
 /**
  * @brief Create a Grid
@@ -11,6 +12,7 @@ class Puissance4 : public Game {
         Puissance4(const Player& player1, const Player& player2);
         ~Puissance4() override;
         
+        Token getTokenLocation(const Player& player) override;
         void displayBoard() override;
         bool isPlayerWon(const Player& player) override;
         bool isGameOver(const Player& player) override;

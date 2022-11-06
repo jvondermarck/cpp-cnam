@@ -1,6 +1,7 @@
 #include "morpion.hpp"
 
-Morpion::Morpion(const Player& player1, const Player& player2): Game::Game(player1, player2, 3, 3){}
+Morpion::Morpion(const Player& player1, const Player& player2): 
+    Game::Game(player1, player2, 3, 3) {}
 
 Morpion::~Morpion() {}
 
@@ -9,6 +10,43 @@ void Morpion::displayBoard()
     std::cout << "\nMorpion bord: " << std::endl;
     Game::displayBoard();
 }
+
+Token Morpion::getTokenLocation(const Player& player)
+{
+    int line = -1;
+    int column = -1;
+    std::cout << "\n- Player with " << player.colorToString() << " tokens, place your token" << std::endl;
+
+    while (true)
+    {
+        while (line > Game::x_total_square || line < 1)
+        {
+            std::cout << "Enter the x coordinate : ";
+            std::cin >> line;
+        }
+
+        line--; // bc we start at index 0
+
+        while (column > Game::y_total_square || column < 1)
+        {
+            std::cout << "Enter the y coordinate : ";
+            std::cin >> column;
+        }
+
+        column--;
+
+        if (Game::square_grid[line][column].isEmpty())
+        {
+            Token token = Token(player.getColorToken(), line, column);
+            return token;
+        } else
+        {
+            std::cout << "The case is occupied. Try again." << std::endl;
+            line = 0;
+            column = 0;
+        }
+    }
+} 
 
 bool Morpion::isGameOver(const Player& player) 
 {
