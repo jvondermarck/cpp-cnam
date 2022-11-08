@@ -1,7 +1,24 @@
 #include "morpion.hpp"
 
 Morpion::Morpion(const Player& player1, const Player& player2): 
-    Game::Game(player1, player2, 3, 3) {}
+    Game::Game(player1, player2, 3, 3) 
+    {
+        char gamePlayingMode;
+        while ((gamePlayingMode != 'y') && (gamePlayingMode != 'n'))
+        {
+            std::cout << "Playing mode : play with a computer (y/n) ? ";
+            std::cin >> gamePlayingMode;
+        }
+
+        if(gamePlayingMode == 'y'){
+            std::cout << "You are going to play with a computer" << std::endl;
+            this->computerPlayer = player2;
+            isComputerPlaying = true;
+        } else {
+            std::cout << "You are going to play in pairs" << std::endl;
+            isComputerPlaying = false;
+        }
+    }
 
 Morpion::~Morpion() {}
 
@@ -9,6 +26,32 @@ void Morpion::displayBoard()
 {
     std::cout << "\nMorpion bord: " << std::endl;
     Game::displayBoard();
+}
+
+void Morpion::playRound(const Player& player)
+{
+    if(isComputerPlaying && player.getColorToken() == computerPlayer.getColorToken()){
+        Token token = this->getTokenLocationComputer();
+        this->dropOffToken(token);
+    } else {
+        Game::playRound(player);
+    }
+}
+
+Token Morpion::getTokenLocationComputer()
+{
+    Token token;
+    for(int i=0; i<this->x_total_square; i++)
+    {
+        for(int j=0; j<this->y_total_square; j++)
+        {
+            if(Game::square_grid[i][j].isEmpty()){
+                token = Token(computerPlayer.getColorToken(), i, j);
+                break;
+            }
+        }
+    }
+    return token;
 }
 
 Token Morpion::getTokenLocation(const Player& player)

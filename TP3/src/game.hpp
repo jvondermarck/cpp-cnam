@@ -62,7 +62,7 @@ class Game {
          * 
          * @param player 
          */
-        void playRound(const Player& player);
+        virtual void playRound(const Player& player);
 
         /**
          * @brief Check if the player won in the game
