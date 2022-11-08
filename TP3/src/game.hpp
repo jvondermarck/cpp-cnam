@@ -71,7 +71,7 @@ class Game {
          * @return true the player won the game
          * @return false the player didn't won the game 
          */
-        virtual bool isPlayerWon(const Player& player) = 0;
+        bool isPlayerWon(const Player& player);
 
         /**
          * @brief Check if in the board game it's not possible to play anymore so the game is a draw
@@ -88,12 +88,16 @@ class Game {
          * @return true the game is over so we stop the game
          * @return false the game is not yet finished, so we continue playing
          */
-        virtual bool isGameOver(const Player& player) = 0;
+        bool isGameOver(const Player& player);
 
         /**
          * @brief To simulate a game match between players 
          */
         void playGame();
+
+        virtual bool isLineVictory(const Player& player) = 0;
+        virtual bool isColumnVictory(const Player& player) = 0;
+        virtual bool isDiagonalVictory(const Player& player) = 0;
 
         /**
          * @brief Check if two Players are equal by comparing they ColorToken

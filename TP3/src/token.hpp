@@ -54,10 +54,36 @@ public:
      * @param column 
      */
     inline void setColumn(int column) { this->coord_y = column;}
-    bool isWhiteToken();
-    bool isBlackToken();
+    
+    /**
+     * @brief Check if the token has a white color
+     * 
+     * @return true is white
+     * @return false is not white
+     */
+    bool isWhiteToken() const;
+
+    /**
+     * @brief Check if the token has a black color
+     * 
+     * @return true is black
+     * @return false is not black
+     */
+    bool isBlackToken() const;
+
+    /**
+     * @brief Get the Color Token object
+     * 
+     * @return ColorToken 
+     */
     inline ColorToken getColorToken() const {return this->color_token;}
-    inline void setColorToken(ColorToken color) { this->color_token = color;}
+    
+    /**
+     * @brief Set the Color Token object
+     * 
+     * @param color 
+     */
+    inline void setColorToken(const ColorToken &color) { this->color_token = color;}
 private:
     ColorToken color_token;
     int coord_x;

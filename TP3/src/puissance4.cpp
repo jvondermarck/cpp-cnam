@@ -46,17 +46,7 @@ Token Puissance4::getTokenLocation(const Player& player)
     }
 } 
 
-bool Puissance4::isGameOver(const Player& player)
-{
-    return Game::isDraw() || isPlayerWon(player);
-}
-
-bool Puissance4::isPlayerWon(const Player& player)
-{
-    return isLinePlayerVictory(player) || isDiagonalPlayerVictory(player) || isColumnPlayerVictory(player) ;
-}
-
-bool Puissance4::isLinePlayerVictory(const Player& player)
+bool Puissance4::isLineVictory(const Player& player)
 {
     int amountOfToken = 0;
     for(int i=0; i<Game::x_total_square; i++)
@@ -76,7 +66,7 @@ bool Puissance4::isLinePlayerVictory(const Player& player)
     return false;
 }
 
-bool Puissance4::isColumnPlayerVictory(const Player& player)
+bool Puissance4::isColumnVictory(const Player& player)
 {
     int amountOfToken = 0;
     for(int i=0; i<Game::y_total_square; i++)
@@ -97,7 +87,7 @@ bool Puissance4::isColumnPlayerVictory(const Player& player)
     return false;
 }
 
-bool Puissance4::isDiagonalPlayerVictory(const Player& player)
+bool Puissance4::isDiagonalVictory(const Player& player)
 {
     int amountOfToken = 0;
     for(int i=0; i<Game::x_total_square; i++)

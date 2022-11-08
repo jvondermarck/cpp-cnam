@@ -14,12 +14,10 @@ class Morpion : public Game {
 
         Token getTokenLocation(const Player& player) override;
         void displayBoard() override;
-        bool isPlayerWon(const Player& player) override;
-        bool isGameOver(const Player& player) override;
 
-        bool isLineFilled(const Player& player);
-        bool isColumnFilled(const Player& player);
-        bool isDiagonalFilled(const Player& player);
+        bool isLineVictory(const Player& player) override;
+        bool isColumnVictory(const Player& player) override;
+        bool isDiagonalVictory(const Player& player) override;
 };
 
 #endif

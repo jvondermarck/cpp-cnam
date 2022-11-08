@@ -77,6 +77,16 @@ void Game::dropOffToken(const Token& token)
     this->displayBoard();
 }
 
+bool Game::isGameOver(const Player& player) 
+{
+    return isDraw() || isPlayerWon(player);
+}
+
+bool Game::isPlayerWon(const Player& player)
+{
+    return isLineVictory(player) || isColumnVictory(player) || isDiagonalVictory(player);
+}
+
 bool Game::isDraw()
 {
     for(int i=0; i<this->x_total_square; i++)
@@ -107,24 +117,24 @@ void Game::playGame()
         if(this->isGameOver(actualPlayer)){
             std::cout << "GAME OVER\n" << std::endl;
             if(this->isDraw()){
-                char playAgain;
                 std::cout << "DRAW MATCH" << std::endl;
-                
-                while((playAgain != 'y') && (playAgain != 'n')){
-                    std::cout << "Do you wanna play again ? y/n ";
-                    std::cin >> playAgain;
-                }
+            } else if(isPlayerWon(actualPlayer)) {
+                std::cout << "Player won with the " << actualPlayer.colorToString() << " tokens. Congrats."<< std::endl;
+            }
 
-                if(playAgain == 'y'){
-                    std::cout << "We restart the game !";
-                    this->initBoard();
-                    this->playGame();
-                } else {
-                    std::cout << "Good bye!";
-                    exit(0);
-                }
+            char playAgain;
+            while((playAgain != 'y') && (playAgain != 'n')){
+                std::cout << "Do you wanna play again ? y/n ";
+                std::cin >> playAgain;
+            }
+
+            if(playAgain == 'y'){
+                std::cout << "We restart the game !" << std::endl;
+                this->initBoard();
+                this->playGame();
             } else {
-                break;
+                std::cout << "Good bye!" << std::endl;
+                exit(0);
             }
         }
 

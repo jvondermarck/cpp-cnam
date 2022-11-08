@@ -48,17 +48,7 @@ Token Morpion::getTokenLocation(const Player& player)
     }
 } 
 
-bool Morpion::isGameOver(const Player& player) 
-{
-    return Game::isDraw() || isPlayerWon(player);
-}
-
-bool Morpion::isPlayerWon(const Player& player)
-{
-    return isLineFilled(player) || isColumnFilled(player) || isDiagonalFilled(player);
-}
-
-bool Morpion::isLineFilled(const Player& player)
+bool Morpion::isLineVictory(const Player& player)
 {
     int amountOfToken = 0;
     for(int i=0; i<Game::x_total_square; i++)
@@ -76,7 +66,7 @@ bool Morpion::isLineFilled(const Player& player)
     return false;
 }
 
-bool Morpion::isColumnFilled(const Player& player)
+bool Morpion::isColumnVictory(const Player& player)
 {
     int amountOfToken = 0;
     for(int i=0; i<Game::y_total_square; i++)
@@ -94,7 +84,7 @@ bool Morpion::isColumnFilled(const Player& player)
     return false;
 }
 
-bool Morpion::isDiagonalFilled(const Player& player)
+bool Morpion::isDiagonalVictory(const Player& player)
 {
     int amountOfToken = 0;
     // seek if diagonal filled from top left to bottom right

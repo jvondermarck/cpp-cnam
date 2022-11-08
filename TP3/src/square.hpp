@@ -3,6 +3,11 @@
 
 #include "token.hpp"
 
+/**
+ * @brief Enumeration which determine a state of a specific square
+ * Empty means that there is no token on the square
+ * Occupied means that there is a token on the square
+ */
 enum class State : int {
   EMPTY = 0,
   OCCUPIED = 1,
@@ -26,10 +31,31 @@ class Square
      */
     ~Square() = default;
 
+    /**
+     * @brief Check whereas the square is empty
+     * 
+     * @return true the square is empty so there is no token
+     * @return false 
+     */
     bool isEmpty() const;
+
+    /**
+     * @brief Check if the square is occupied 
+     * 
+     * @return true the square has a token 
+     * @return false 
+     */
     bool isOccupied() const;
-    void setEmpty();
-    void setOccupied();
+
+    /**
+     * @brief Set the square state to empty (no token on it anymore)
+     */
+    inline void setEmpty() { this->state_square = State::EMPTY; }
+
+    /**
+     * @brief Set the square state to occupied (there is a token)
+     */
+    inline void setOccupied() { this->state_square = State::OCCUPIED; }
 
     /**
      * @brief Get the State object
@@ -59,7 +85,13 @@ class Square
      */
     inline void setToken(const Token& token) { this->token_square = token; }
   private:
+    /**
+     * @brief The token object that contains
+     */
     Token token_square;
+    /**
+     * @brief The state of the square on the board game (occupied/empty)
+     */
     State state_square;
 };
 

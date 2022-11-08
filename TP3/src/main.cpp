@@ -28,7 +28,6 @@ int main()
             Morpion game (player1, player2);
             game.playGame();
         }
-        
     }
     
     return 0;

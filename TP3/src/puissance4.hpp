@@ -14,12 +14,10 @@ class Puissance4 : public Game {
         
         Token getTokenLocation(const Player& player) override;
         void displayBoard() override;
-        bool isPlayerWon(const Player& player) override;
-        bool isGameOver(const Player& player) override;
-
-        bool isLinePlayerVictory(const Player& player);
-        bool isColumnPlayerVictory(const Player& player);
-        bool isDiagonalPlayerVictory(const Player& player);
+        
+        bool isLineVictory(const Player& player) override;
+        bool isColumnVictory(const Player& player) override;
+        bool isDiagonalVictory(const Player& player) override;
 };
 
 #endif
