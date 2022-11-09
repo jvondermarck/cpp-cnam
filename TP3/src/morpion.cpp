@@ -31,62 +31,63 @@ void Morpion::displayBoard()
 void Morpion::playRound(const Player& player)
 {
     if(isComputerPlaying && player.getColorToken() == computerPlayer.getColorToken()){
-        Token token = this->getTokenLocationComputer();
-        this->dropOffToken(token);
+        this->dropOffTokenComputer();
     } else {
-        Game::playRound(player);
+        this->dropOffToken(player);
     }
+
+    Game::displayBoard();
 }
 
-Token Morpion::getTokenLocationComputer()
+void Morpion::dropOffTokenComputer()
 {
-    Token token;
-    for(int i=0; i<this->x_total_square; i++)
+    srand (time(NULL));
+    int lineRand;
+    int columnRand;
+
+    while(true)
     {
-        for(int j=0; j<this->y_total_square; j++)
-        {
-            if(Game::square_grid[i][j].isEmpty()){
-                token = Token(computerPlayer.getColorToken(), i, j);
-                break;
-            }
+        lineRand = rand() % (this->x_total_square);
+        columnRand = rand() % (this->y_total_square);
+        std::cout << lineRand << columnRand << std::endl;
+        if(Game::square_grid[lineRand][columnRand].isEmpty()){
+            Game::square_grid[lineRand][columnRand].setOccupied();
+            Game::square_grid[lineRand][columnRand].setColorToken(computerPlayer.getColorToken());
+            return;
         }
     }
-    return token;
 }
 
-Token Morpion::getTokenLocation(const Player& player)
+void Morpion::dropOffToken(const Player& player)
 {
-    int line = -1;
-    int column = -1;
     std::cout << "\n- Player with " << player.colorToString() << " tokens, place your token" << std::endl;
 
     while (true)
     {
+        int line = 0;
+        int column = 0;
         while (line > Game::x_total_square || line < 1)
         {
             std::cout << "Enter the x coordinate : ";
             std::cin >> line;
         }
 
-        line--; // bc we start at index 0
-
         while (column > Game::y_total_square || column < 1)
         {
             std::cout << "Enter the y coordinate : ";
             std::cin >> column;
         }
-
+        
+        line--; // bc we start at index 0
         column--;
 
         if (Game::square_grid[line][column].isEmpty())
         {
-            Token token = Token(player.getColorToken(), line, column);
-            return token;
-        } else
-        {
+            Game::square_grid[line][column].setOccupied();
+            Game::square_grid[line][column].setColorToken(player.getColorToken());
+            break;
+        } else {
             std::cout << "The case is occupied. Try again." << std::endl;
-            line = 0;
-            column = 0;
         }
     }
 } 

@@ -43,19 +43,11 @@ class Game {
         virtual void displayBoard();
 
         /**
-         * @brief Get the token location on the board game by asking user to choose a coordinate available
-         * 
-         * @param player The actual player
-         * @return Token
-         */
-        virtual Token getTokenLocation(const Player& player) = 0;
-
-        /**
          * @brief Droping off the token on the board game
          * 
          * @param token 
          */
-        void dropOffToken(const Token& token);
+        virtual void dropOffToken(const Player& player) = 0;
 
         /**
          * @brief play a round for a player to drop off a token on the game

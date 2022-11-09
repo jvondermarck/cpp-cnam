@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include "game.hpp"
+#include <time.h>
 
 /**
  * @brief Create a Grid
@@ -13,8 +14,8 @@ class Morpion : public Game {
         ~Morpion() override;
 
         void playRound(const Player& player) override;
-        Token getTokenLocationComputer();
-        Token getTokenLocation(const Player& player) override;
+        void dropOffTokenComputer();
+        void dropOffToken(const Player& player) override;
         void displayBoard() override;
 
         bool isLineVictory(const Player& player) override;

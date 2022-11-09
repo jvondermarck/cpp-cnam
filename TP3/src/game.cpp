@@ -66,14 +66,7 @@ void Game::displayBoard()
 
 void Game::playRound(const Player& player)
 {
-    Token token = this->getTokenLocation(player);
-    this->dropOffToken(token);
-}
-
-void Game::dropOffToken(const Token& token)
-{
-    this->square_grid[token.getLine()][token.getColumn()].setOccupied();
-    this->square_grid[token.getLine()][token.getColumn()].setToken(token);
+    this->dropOffToken(player);
     this->displayBoard();
 }
 

@@ -12,7 +12,7 @@ class Puissance4 : public Game {
         Puissance4(const Player& player1, const Player& player2);
         ~Puissance4() override;
         
-        Token getTokenLocation(const Player& player) override;
+        void dropOffToken(const Player& player) override;
         void displayBoard() override;
         
         bool isLineVictory(const Player& player) override;

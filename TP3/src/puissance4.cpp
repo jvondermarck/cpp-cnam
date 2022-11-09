@@ -11,13 +11,13 @@ void Puissance4::displayBoard()
     Game::displayBoard();
 }
 
-Token Puissance4::getTokenLocation(const Player& player)
+void Puissance4::dropOffToken(const Player& player)
 {
-    int column = -1;
     std::cout << "\n- Player with " << player.colorToString() << " tokens, place your token" << std::endl;
 
     while (true)
     {
+        int column = 0;
         while (column > Game::y_total_square || column < 1)
         {
             std::cout << "Enter the number of the column : ";
@@ -36,8 +36,9 @@ Token Puissance4::getTokenLocation(const Player& player)
                 }
             }
     	    
-            Token token = Token(player.getColorToken(), i, column);
-            return token;
+            Game::square_grid[i][column].setOccupied();
+            Game::square_grid[i][column].setColorToken(player.getColorToken());
+            break;
         } else
         {
             std::cout << "The column is full." << std::endl;
@@ -134,4 +135,3 @@ bool Puissance4::isDiagonalVictory(const Player& player)
 
     return false;
 }
-

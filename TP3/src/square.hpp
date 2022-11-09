@@ -84,6 +84,8 @@ class Square
      * @param token 
      */
     inline void setToken(const Token& token) { this->token_square = token; }
+
+    void setColorToken(const ColorToken& color) { this->token_square.setColorToken(color); }
   private:
     /**
      * @brief The token object that contains
