@@ -4,7 +4,7 @@ Game::Game(const Player& player1, const Player& player2, int line, int column):
     playerOne(player1), playerTwo(player2),
     rowSize(line), columnSize(column)
 {
-    this->square_grid.resize(this->rowSize, std::vector<Square>(this->columnSize));
+    this->squareGrid.resize(this->rowSize, std::vector<Square>(this->columnSize));
     
     this->matchRound = 0;
     this->initGame();
@@ -33,7 +33,7 @@ void Game::initBoard()
     {
         for(int j=0; j<this->columnSize; j++)
         {
-            this->square_grid[i][j] = Square(Token(ColorToken::EMPTY, i, j), State::EMPTY);
+            this->squareGrid[i][j] = Square(Token(ColorToken::EMPTY, i, j), State::EMPTY);
         }
     }
 
@@ -48,15 +48,15 @@ void Game::displayBoard()
         std::cout << "-\n|";
         for(int j=0; j<this->columnSize; j++)
         {
-            if(this->square_grid[i][j].isEmpty())
+            if(this->squareGrid[i][j].isEmpty())
             {
                 std::cout << " - ";
             } else {
-                if (this->square_grid[i][j].getToken().isBlackToken())
+                if (this->squareGrid[i][j].getToken().isBlackToken())
                 {
                     std::cout << " X ";
                 }
-                else if (this->square_grid[i][j].getToken().isWhiteToken())
+                else if (this->squareGrid[i][j].getToken().isWhiteToken())
                 {
                     std::cout << " O ";
                 }
@@ -92,7 +92,7 @@ bool Game::isDraw()
     {
         for(int j=0; j<this->columnSize; j++)
         {
-            if(this->square_grid[i][j].isEmpty()) // means if something a square is still empty = not the end
+            if(this->squareGrid[i][j].isEmpty()) // means if something a square is still empty = not the end
             {
                 return false;
             }

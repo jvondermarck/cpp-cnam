@@ -102,7 +102,7 @@ class Game {
         friend bool operator==(const Player& player, const Player& playerCompare);
         // note for myself : A friend class can access private and protected members of other class in which it is declared as friend.
     protected:
-        std::vector<std::vector<Square>> square_grid; // 2D vector array that don't need a specific size array at instiantiation
+        std::vector<std::vector<Square>> squareGrid; // 2D vector array that don't need a specific size array at instiantiation
         const Player playerOne;
         const Player playerTwo;
         const int rowSize;

@@ -33,18 +33,18 @@ void Puissance4::dropOffToken(const Player& player)
             }
         }
 
-        if (Game::square_grid[0][column].isEmpty()) // line 0 bc we placetoken from bottom to top so if index 0 is not empty == column full
+        if (Game::squareGrid[0][column].isEmpty()) // line 0 bc we placetoken from bottom to top so if index 0 is not empty == column full
         {
             int i;
             for(i=this->rowSize-1; i>=0; i--) // start from bottom to top
             {
-                if(Game::square_grid[i][column].isEmpty()){
+                if(Game::squareGrid[i][column].isEmpty()){
                     break;
                 }
             }
     	    
-            Game::square_grid[i][column].setOccupied();
-            Game::square_grid[i][column].setColorToken(player.getColorToken());
+            Game::squareGrid[i][column].setOccupied();
+            Game::squareGrid[i][column].setColorToken(player.getColorToken());
             break;
         } else
         {
@@ -60,7 +60,7 @@ bool Puissance4::isLineVictory(const Player& player)
     {
         for(int j=0; j<Game::columnSize; j++)
         {
-            if(Game::square_grid[i][j].getToken().getColorToken() == player.getColorToken()) 
+            if(Game::squareGrid[i][j].getToken().getColorToken() == player.getColorToken()) 
             {
                 amountOfToken++;
                 if(amountOfToken == 4) { return true; }
@@ -80,7 +80,7 @@ bool Puissance4::isColumnVictory(const Player& player)
     {
         for(int j=rowSize-1; j>=0; j--)
         {
-            if(Game::square_grid[j][i].getToken().getColorToken() == player.getColorToken()) 
+            if(Game::squareGrid[j][i].getToken().getColorToken() == player.getColorToken()) 
             {
                 amountOfToken++;
                 if(amountOfToken == 4) { return true; } 
@@ -101,13 +101,13 @@ bool Puissance4::isDiagonalVictory(const Player& player)
     {
         for(int j=0; j<Game::columnSize; j++)
         {
-            if(Game::square_grid[i][j].getToken().getColorToken() == player.getColorToken()) 
+            if(Game::squareGrid[i][j].getToken().getColorToken() == player.getColorToken()) 
             {
                 // check diagonal going to the right
                 for(int diagonal=1; diagonal<4; diagonal++)
                 {
                     if(i+diagonal < 0 ||  i+diagonal >= Game::rowSize || j+diagonal < 0 ||  j+diagonal >= Game::columnSize) { break;}
-                    if(Game::square_grid[i+diagonal][j+diagonal].getToken().getColorToken() == player.getColorToken()){
+                    if(Game::squareGrid[i+diagonal][j+diagonal].getToken().getColorToken() == player.getColorToken()){
                         amountOfToken++;
                     } else {
                         amountOfToken = 0;
@@ -122,7 +122,7 @@ bool Puissance4::isDiagonalVictory(const Player& player)
                 {
                     if(i+diagonal < 0 ||  i+diagonal >= Game::rowSize || j-diagonal < 0 ||  j-diagonal >= Game::columnSize) { break;}
 
-                    if(Game::square_grid[i+diagonal][j-diagonal].getToken().getColorToken() == player.getColorToken()){
+                    if(Game::squareGrid[i+diagonal][j-diagonal].getToken().getColorToken() == player.getColorToken()){
                         amountOfToken++;
                     } else {
                         amountOfToken = 0;
