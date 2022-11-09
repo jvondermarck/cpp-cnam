@@ -103,10 +103,11 @@ class Game {
         // note for myself : A friend class can access private and protected members of other class in which it is declared as friend.
     protected:
         std::vector<std::vector<Square>> square_grid; // 2D vector array that don't need a specific size array at instiantiation
-        const Player player_one;
-        const Player player_two;
-        const int x_total_square;
-        const int y_total_square;
+        const Player playerOne;
+        const Player playerTwo;
+        const int rowSize;
+        const int columnSize;
+        int matchRound;
 };
 
 #endif

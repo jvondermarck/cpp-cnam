@@ -1,14 +1,15 @@
 #include "game.hpp"
 
 Game::Game(const Player& player1, const Player& player2, int line, int column): 
-    player_one(player1), player_two(player2),
-    x_total_square(line), y_total_square(column)
+    playerOne(player1), playerTwo(player2),
+    rowSize(line), columnSize(column)
 {
-    this->square_grid.resize(this->x_total_square, std::vector<Square>(this->y_total_square));
+    this->square_grid.resize(this->rowSize, std::vector<Square>(this->columnSize));
     
+    this->matchRound = 0;
     this->initGame();
 
-    if(this->player_one.getColorToken() == ColorToken::BLACK){
+    if(this->playerOne.getColorToken() == ColorToken::BLACK){
         std::cout << "- Player 1 : you have the black color and we give you the 'X' token." << std::endl;
         std::cout << "- Player 2 : you have the white color and we give you the 'O' token." << std::endl;
     } else {
@@ -27,9 +28,10 @@ void Game::initGame()
 
 void Game::initBoard()
 {
-    for(int i=0; i<this->x_total_square; i++)
+    std::cout << "\nBord game has been initialized ! Good luck !" << std::endl;
+    for(int i=0; i<this->rowSize; i++)
     {
-        for(int j=0; j<this->y_total_square; j++)
+        for(int j=0; j<this->columnSize; j++)
         {
             this->square_grid[i][j] = Square(Token(ColorToken::EMPTY, i, j), State::EMPTY);
         }
@@ -39,11 +41,12 @@ void Game::initBoard()
 
 void Game::displayBoard()
 {
-    std::cout << "-------------\n";
-    for(int i=0; i<this->x_total_square; i++)
+    for(int i=0; i<this->columnSize; i++) { std::cout << "----"; }
+
+    for(int i=0; i<this->rowSize; i++)
     {
-        std::cout << "|";
-        for(int j=0; j<this->y_total_square; j++)
+        std::cout << "-\n|";
+        for(int j=0; j<this->columnSize; j++)
         {
             if(this->square_grid[i][j].isEmpty())
             {
@@ -60,12 +63,15 @@ void Game::displayBoard()
             }
             std::cout << "|";
         }
-        std::cout << "\n-------------\n";
+        std::cout << "\n";
+        for(int i=0; i<this->columnSize; i++) { std::cout << "----"; }
     }
+    std::cout << "-\n";
 }
 
 void Game::playRound(const Player& player)
 {
+    std::cout << "\n-------- MATCH n°" << ++matchRound << " --------";
     this->dropOffToken(player);
     this->displayBoard();
 }
@@ -82,9 +88,9 @@ bool Game::isPlayerWon(const Player& player)
 
 bool Game::isDraw()
 {
-    for(int i=0; i<this->x_total_square; i++)
+    for(int i=0; i<this->rowSize; i++)
     {
-        for(int j=0; j<this->y_total_square; j++)
+        for(int j=0; j<this->columnSize; j++)
         {
             if(this->square_grid[i][j].isEmpty()) // means if something a square is still empty = not the end
             {
@@ -103,16 +109,16 @@ bool operator==(const Player& player, const Player& playerCompare)
 
 void Game::playGame()
 {
-    Player actualPlayer = this->player_one;
+    Player actualPlayer = this->playerOne;
     while(true)
     {
         this->playRound(actualPlayer);
         if(this->isGameOver(actualPlayer)){
-            std::cout << "GAME OVER\n" << std::endl;
+            std::cout << "\nGAME OVER" << std::endl;
             if(this->isDraw()){
                 std::cout << "DRAW MATCH" << std::endl;
             } else if(isPlayerWon(actualPlayer)) {
-                std::cout << "Player won with the " << actualPlayer.colorToString() << " tokens. Congrats."<< std::endl;
+                std::cout << "Player won with the " << actualPlayer.colorToString() << " tokens. Congrats.\n"<< std::endl;
             }
 
             char playAgain;
@@ -132,6 +138,6 @@ void Game::playGame()
         }
 
         // we change the actual player
-        actualPlayer = (actualPlayer == this->player_one) ? this->player_two : this->player_one;
+        actualPlayer = (actualPlayer == this->playerOne) ? this->playerTwo : this->playerOne;
     }
 }

@@ -2,7 +2,7 @@
 
 Token::Token() {}
 Token::Token(const ColorToken& color, const int& line, const int& column): 
-    color_token(color), coord_x(line), coord_y(column) {}
+    color_token(color), xCoordinate(line), yCoordinate(column) {}
 
 bool Token::isWhiteToken() const
 {

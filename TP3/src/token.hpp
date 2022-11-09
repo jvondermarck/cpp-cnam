@@ -17,8 +17,8 @@ public:
     /**
      * @brief Construct a new Token 
      * 
-     * @param coord_x : line
-     * @param coord_y : column
+     * @param xCoordinate : line
+     * @param yCoordinate : column
      */
     Token(const ColorToken& color, const int& line, const int& column);
 
@@ -32,28 +32,28 @@ public:
      * 
      * @return int 
      */
-    inline int getLine() const {return this->coord_x;}
+    inline int getLine() const {return this->xCoordinate;}
     
     /**
      * @brief Set the line coordinate 
      * 
      * @param line 
      */
-    inline void setLine(int line) { this->coord_x = line;}
+    inline void setLine(int line) { this->xCoordinate = line;}
 
     /**
      * @brief Get the column coordinate of the position of a token on the game
      * 
      * @return int 
      */
-    inline int getColumn() const {return this->coord_y;}
+    inline int getColumn() const {return this->yCoordinate;}
 
     /**
      * @brief Set the column coordinate 
      * 
      * @param column 
      */
-    inline void setColumn(int column) { this->coord_y = column;}
+    inline void setColumn(int column) { this->yCoordinate = column;}
     
     /**
      * @brief Check if the token has a white color
@@ -86,8 +86,8 @@ public:
     inline void setColorToken(const ColorToken &color) { this->color_token = color;}
 private:
     ColorToken color_token;
-    int coord_x;
-    int coord_y;
+    int xCoordinate;
+    int yCoordinate;
 };
 
 #endif 

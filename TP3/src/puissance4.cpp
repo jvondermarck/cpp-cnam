@@ -18,18 +18,25 @@ void Puissance4::dropOffToken(const Player& player)
     while (true)
     {
         int column = 0;
-        while (column > Game::y_total_square || column < 1)
+        while (true)
         {
-            std::cout << "Enter the number of the column : ";
-            std::cin >> column;
+            std::cout << "Enter the <y> coordinate : ";
+            scanf("%d", &column);
+            if (std::cin.fail() || column < 1 || column > this->columnSize) {
+                std::cout << "--> Error : please enter a valid value !" << std::endl;
+                std::cin.clear();
+                std::cin.ignore(); // we clear and ignore the failure to restart the loop
+                continue; // we start from the beginning of the loop
+            } else {
+                column--;
+                break;
+            }
         }
-
-        column--; // bc we start at index 0
 
         if (Game::square_grid[0][column].isEmpty()) // line 0 bc we placetoken from bottom to top so if index 0 is not empty == column full
         {
             int i;
-            for(i=this->x_total_square-1; i>=0; i--) // start from bottom to top
+            for(i=this->rowSize-1; i>=0; i--) // start from bottom to top
             {
                 if(Game::square_grid[i][column].isEmpty()){
                     break;
@@ -42,7 +49,6 @@ void Puissance4::dropOffToken(const Player& player)
         } else
         {
             std::cout << "The column is full." << std::endl;
-            column = 0;
         }
     }
 } 
@@ -50,9 +56,9 @@ void Puissance4::dropOffToken(const Player& player)
 bool Puissance4::isLineVictory(const Player& player)
 {
     int amountOfToken = 0;
-    for(int i=0; i<Game::x_total_square; i++)
+    for(int i=0; i<Game::rowSize; i++)
     {
-        for(int j=0; j<Game::y_total_square; j++)
+        for(int j=0; j<Game::columnSize; j++)
         {
             if(Game::square_grid[i][j].getToken().getColorToken() == player.getColorToken()) 
             {
@@ -70,9 +76,9 @@ bool Puissance4::isLineVictory(const Player& player)
 bool Puissance4::isColumnVictory(const Player& player)
 {
     int amountOfToken = 0;
-    for(int i=0; i<Game::y_total_square; i++)
+    for(int i=0; i<Game::columnSize; i++)
     {
-        for(int j=x_total_square-1; j>=0; j--)
+        for(int j=rowSize-1; j>=0; j--)
         {
             if(Game::square_grid[j][i].getToken().getColorToken() == player.getColorToken()) 
             {
@@ -91,16 +97,16 @@ bool Puissance4::isColumnVictory(const Player& player)
 bool Puissance4::isDiagonalVictory(const Player& player)
 {
     int amountOfToken = 0;
-    for(int i=0; i<Game::x_total_square; i++)
+    for(int i=0; i<Game::rowSize; i++)
     {
-        for(int j=0; j<Game::y_total_square; j++)
+        for(int j=0; j<Game::columnSize; j++)
         {
             if(Game::square_grid[i][j].getToken().getColorToken() == player.getColorToken()) 
             {
                 // check diagonal going to the right
                 for(int diagonal=1; diagonal<4; diagonal++)
                 {
-                    if(i+diagonal < 0 ||  i+diagonal >= Game::x_total_square || j+diagonal < 0 ||  j+diagonal >= Game::y_total_square) { break;}
+                    if(i+diagonal < 0 ||  i+diagonal >= Game::rowSize || j+diagonal < 0 ||  j+diagonal >= Game::columnSize) { break;}
                     if(Game::square_grid[i+diagonal][j+diagonal].getToken().getColorToken() == player.getColorToken()){
                         amountOfToken++;
                     } else {
@@ -114,7 +120,7 @@ bool Puissance4::isDiagonalVictory(const Player& player)
                 // check diagonal going to the left
                 for(int diagonal=1; diagonal<4; diagonal++)
                 {
-                    if(i+diagonal < 0 ||  i+diagonal >= Game::x_total_square || j-diagonal < 0 ||  j-diagonal >= Game::y_total_square) { break;}
+                    if(i+diagonal < 0 ||  i+diagonal >= Game::rowSize || j-diagonal < 0 ||  j-diagonal >= Game::columnSize) { break;}
 
                     if(Game::square_grid[i+diagonal][j-diagonal].getToken().getColorToken() == player.getColorToken()){
                         amountOfToken++;

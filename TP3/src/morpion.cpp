@@ -6,7 +6,7 @@ Morpion::Morpion(const Player& player1, const Player& player2):
         char gamePlayingMode;
         while ((gamePlayingMode != 'y') && (gamePlayingMode != 'n'))
         {
-            std::cout << "Playing mode : play with a computer (y/n) ? ";
+            std::cout << "\nPlaying mode : play with a computer (y/n) ? ";
             std::cin >> gamePlayingMode;
         }
 
@@ -30,6 +30,7 @@ void Morpion::displayBoard()
 
 void Morpion::playRound(const Player& player)
 {
+    std::cout << "\n-------- MATCH n°" << ++Game::matchRound << " --------";
     if(isComputerPlaying && player.getColorToken() == computerPlayer.getColorToken()){
         this->dropOffTokenComputer();
     } else {
@@ -45,11 +46,11 @@ void Morpion::dropOffTokenComputer()
     int lineRand;
     int columnRand;
 
+    std::cout << "\n- Computer with " << computerPlayer.colorToString() << " will place his token : " << std::endl;
     while(true)
     {
-        lineRand = rand() % (this->x_total_square);
-        columnRand = rand() % (this->y_total_square);
-        std::cout << lineRand << columnRand << std::endl;
+        lineRand = rand() % (this->rowSize);
+        columnRand = rand() % (this->columnSize);
         if(Game::square_grid[lineRand][columnRand].isEmpty()){
             Game::square_grid[lineRand][columnRand].setOccupied();
             Game::square_grid[lineRand][columnRand].setColorToken(computerPlayer.getColorToken());
@@ -66,21 +67,22 @@ void Morpion::dropOffToken(const Player& player)
     {
         int line = 0;
         int column = 0;
-        while (line > Game::x_total_square || line < 1)
+        while (true)
         {
-            std::cout << "Enter the x coordinate : ";
-            std::cin >> line;
-        }
-
-        while (column > Game::y_total_square || column < 1)
-        {
-            std::cout << "Enter the y coordinate : ";
-            std::cin >> column;
+            std::cout << "Enter the <x,y> coordinates : ";
+            scanf("%d,%d",&line, &column);
+            if (std::cin.fail() || line < 1 || column < 1 || line > this->rowSize || column > this->columnSize) {
+                std::cout << "--> Error : please enter two valid values !" << std::endl;
+                std::cin.clear();
+                std::cin.ignore(); // we clear and ignore the failure to restart the loop
+                continue; // we start from the beginning of the loop
+            } else {
+                line--; // bc we start at index 0
+                column--;
+                break;
+            }
         }
         
-        line--; // bc we start at index 0
-        column--;
-
         if (Game::square_grid[line][column].isEmpty())
         {
             Game::square_grid[line][column].setOccupied();
@@ -95,16 +97,16 @@ void Morpion::dropOffToken(const Player& player)
 bool Morpion::isLineVictory(const Player& player)
 {
     int amountOfToken = 0;
-    for(int i=0; i<Game::x_total_square; i++)
+    for(int i=0; i<Game::rowSize; i++)
     {
-        for(int j=0; j<Game::y_total_square; j++)
+        for(int j=0; j<Game::columnSize; j++)
         {
             if(Game::square_grid[i][j].getToken().getColorToken() == player.getColorToken()) 
             {
                 amountOfToken++;
             }
         }
-        if(Game::y_total_square == amountOfToken) return true;
+        if(Game::columnSize == amountOfToken) return true;
         amountOfToken = 0;
     }
     return false;
@@ -113,16 +115,16 @@ bool Morpion::isLineVictory(const Player& player)
 bool Morpion::isColumnVictory(const Player& player)
 {
     int amountOfToken = 0;
-    for(int i=0; i<Game::y_total_square; i++)
+    for(int i=0; i<Game::columnSize; i++)
     {
-        for(int j=0; j<Game::x_total_square; j++)
+        for(int j=0; j<Game::rowSize; j++)
         {
             if(Game::square_grid[j][i].getToken().getColorToken() == player.getColorToken()) 
             {
                 amountOfToken++;
             }
         }
-        if(Game::x_total_square == amountOfToken) return true;
+        if(Game::rowSize == amountOfToken) return true;
         amountOfToken = 0;
     }
     return false;
@@ -132,9 +134,9 @@ bool Morpion::isDiagonalVictory(const Player& player)
 {
     int amountOfToken = 0;
     // seek if diagonal filled from top left to bottom right
-    for(int i=0; i<Game::x_total_square; i++)
+    for(int i=0; i<Game::rowSize; i++)
     {
-        for(int j=0; j<Game::y_total_square; j++)
+        for(int j=0; j<Game::columnSize; j++)
         {
             if(Game::square_grid[i][j].getToken().getColorToken() == player.getColorToken()) 
             {
@@ -142,14 +144,14 @@ bool Morpion::isDiagonalVictory(const Player& player)
             }
             i++;
         }
-        if(Game::y_total_square == amountOfToken) return true;
+        if(Game::columnSize == amountOfToken) return true;
         amountOfToken = 0;
     }
     
     // seek if diagonal filled from top right to bottom left
-    for(int i=Game::x_total_square-1; i>=0; i--)
+    for(int i=Game::rowSize-1; i>=0; i--)
     {
-        for(int j=Game::y_total_square-1; j>=0; j--)
+        for(int j=Game::columnSize-1; j>=0; j--)
         {
             if(Game::square_grid[i][j].getToken().getColorToken() == player.getColorToken()) 
             {
@@ -157,7 +159,7 @@ bool Morpion::isDiagonalVictory(const Player& player)
             }
             i--;
         }
-        if(Game::y_total_square == amountOfToken) return true;
+        if(Game::columnSize == amountOfToken) return true;
         amountOfToken = 0;
     }
 
