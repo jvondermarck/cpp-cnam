@@ -1,5 +1,8 @@
 # TP3 v2 - implémentation des principes SOLID
 
+> Ce dossier TP3.2 est juste une copie du dossier de mon binome Franck Gutmann. 
+**Aller voir le repository de M. Franck Gutamm à cette [adresse pour avoir les mises à jours !](https://gitlab.com/cours-franck-g/cplusplus/-/tree/main/src/TP3)**
+
 - Déplacement de la méthode `firstRowAvailableInCol()` de la classe `Power4` à la classe `Grid`, car sinon la classe `Power4` a plusieurs responsabilités et si dans le futur on modifie l'état de notre grille on devra aussi faire la modification dans la classe `Power4` ce qui n'est pas du tout une bonne manière d’après le principe de *Single Responsability*.
 
 - Création d’interfaces `CellRequester` et `GameEvaluator` permettant d'implémenter n’importe quelle méthode de demande de case au joueur et de détermination du gagnant sans altérer le code en place :
